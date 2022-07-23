@@ -14,5 +14,12 @@ namespace ToyTetragraphHash
         {
             return "ToyTetragraphHash";
         }
+        internal List<string[,]> stringToBlocks(String input) {
+            List<String[,]> blocks = new List<String[,]>();
+            String[,] block = new String[3,3];
+            blocks.Add(block);
+
+            return blocks;
+        }
     }
 }
