@@ -20,10 +20,10 @@ public class Tests
     {
         String input = "I leave twenty million dollars to my friendly cousin Bill.";
         ToyTetragraphHash hash = new ToyTetragraphHash();
-        List<string[,]> blocks = hash.stringToBlocks(input);
-        Assert.IsInstanceOf<string[,]>(blocks);
+        List<string> blocks = hash.stringToBlocks(input);
+        Assert.IsInstanceOf<List<string>>(blocks);
 
-        Assert.Equals(3, blocks.Count);
+        Assert.AreEqual(3, blocks.Count);
 
     }
 
@@ -59,6 +59,28 @@ public class Tests
         ToyTetragraphHash hash = new ToyTetragraphHash();
         Assert.Throws<Exception>(
              delegate { hash.createTwoDimensionArrayFromString("ABCDEF"); });
+    }
+    [Test]
+    public void TestCreateTwoDimensionArrayFromStringValueTest()
+    {
+        ToyTetragraphHash hash = new ToyTetragraphHash();
+        String[,] result = hash.createTwoDimensionArrayFromString("ABCDEFGHIJKLMNOP");
+        Assert.AreEqual(result[0, 0], "A");
+        Assert.AreEqual(result[1, 0], "E");
+        Assert.AreEqual(result[2, 2], "K");
+
+    }
+
+    [Test]
+    public void TestCreateBlocks()
+    {
+        String input = "ileavetwentymilliondollarstomyfriendlycousinbill";
+        ToyTetragraphHash hash = new ToyTetragraphHash();
+        List<string> blocks = hash.createBlocks(input);
+        Assert.IsInstanceOf<List<string>>(blocks);
+
+        Assert.AreEqual(3, blocks.Count);
+
     }
 
 }

@@ -1,5 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
-using System;
+using System.Text;
 
 [assembly: InternalsVisibleTo("ToyTetragraphHash.Tests")]
 namespace ToyTetragraphHash
@@ -17,13 +17,35 @@ namespace ToyTetragraphHash
         {
             return "ToyTetragraphHash";
         }
-        internal List<string[,]> stringToBlocks(String input)
+        internal List<String> stringToBlocks(String input)
         {
-            List<String[,]> blocks = new List<String[,]>();
-            String[,] block = new String[3, 3];
-            blocks.Add(block);
+            String inputCleaned = cleanString(input);
+            List<String> stringBlocks = createBlocks(inputCleaned);
+           
+            return stringBlocks;
+        }
 
-            return blocks;
+        internal new List<String> createBlocks(string input) {
+            int counter = 0;
+            string holder = "";
+            StringBuilder sb = new StringBuilder(holder);
+            List<string> letterList = new List<string>();
+
+            foreach (char item in input)
+            {
+                sb.Append(item);
+                counter++;
+                if(counter%16==0)
+                {
+                    letterList.Add(sb.ToString());
+                    if (DEBUG) Console.WriteLine(sb);
+                    sb.Clear();
+                }
+            }
+
+            //     too short, padd with nulls
+
+            return letterList;
         }
 
         internal string cleanString(string input)
@@ -43,6 +65,8 @@ namespace ToyTetragraphHash
             int row = 0;
             int col = 0;
 
+            string[,] result = new string[4, 4];
+
             foreach (char item in input)
             {
                 counter++;
@@ -54,14 +78,16 @@ namespace ToyTetragraphHash
                     Console.Out.Write("[" + row + "," + col + "]");
                 }
 
+                result[row, col] = Char.ToString(item);
+
                 col++;
-                if ((counter % 4) == 0 && counter !=0)
+                if ((counter % 4) == 0)
                 {
                     row++;
                     col = 0;
                 }
             }
-            return new string[0, 0];
+            return result;
         }
     }
 }
