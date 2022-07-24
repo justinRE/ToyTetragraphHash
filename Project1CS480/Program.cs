@@ -6,6 +6,8 @@ namespace ToyTetragraphHash
 {
     class ToyTetragraphHash
     {
+        private const Boolean DEBUG = true;
+
         static void Main(string[] args)
         {
             ToyTetragraphHash hash = new ToyTetragraphHash();
@@ -46,8 +48,11 @@ namespace ToyTetragraphHash
                 counter++;
                 if (counter == 1) col = 0;
 
-                Console.Out.Write(item);
-                Console.Out.Write("[" + row+ "," + col + "]");
+                if (DEBUG)
+                {
+                    Console.Out.Write(item);
+                    Console.Out.Write("[" + row + "," + col + "]");
+                }
 
                 col++;
                 if ((counter % 4) == 0 && counter !=0)
@@ -55,7 +60,6 @@ namespace ToyTetragraphHash
                     row++;
                     col = 0;
                 }
-               
             }
             return new string[0, 0];
         }
