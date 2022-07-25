@@ -9,7 +9,7 @@ namespace ToyTetragraphHash
     class ToyTetragraphHash
     {
         private const Boolean DEBUG = false;
-
+        int[] runningTotal = new int[4];
 
         static void Main(string[] args)
         {
@@ -233,7 +233,6 @@ namespace ToyTetragraphHash
 
         internal int[] addColumns(int[,] numArray)
         {
-            int[] runningTotal = new int[4];
             int counter = 0;
             int totalNumber = 0;
 
@@ -246,25 +245,29 @@ namespace ToyTetragraphHash
                 }
                 if (column == 0)
                 {
-                    runningTotal[0] = totalNumber;
+                    runningTotal[0] += totalNumber;
+                    runningTotal[0] = runningTotal[0] % 26;
                     totalNumber = 0;
                     counter = 0;
                 }
                 if (column == 1)
                 {
-                    runningTotal[1] = totalNumber;
+                    runningTotal[1] += totalNumber;
+                    runningTotal[1] = runningTotal[1] % 26;
                     totalNumber = 0;
                     counter = 0;
                 }
                 if (column == 2)
                 {
-                    runningTotal[2] = totalNumber;
+                    runningTotal[2] += totalNumber;
+                    runningTotal[2] = runningTotal[2] % 26;
                     totalNumber = 0;
                     counter = 0;
                 }
                 if (column == 3)
                 {
-                    runningTotal[3] = totalNumber;
+                    runningTotal[3] += totalNumber;
+                    runningTotal[3] = runningTotal[3] % 26;
                     totalNumber = 0;
                     counter = 0;
                 }
