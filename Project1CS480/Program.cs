@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 
 [assembly: InternalsVisibleTo("ToyTetragraphHash.Tests")]
 namespace ToyTetragraphHash
@@ -16,7 +17,7 @@ namespace ToyTetragraphHash
             System.Console.WriteLine(hash.outTitle());
             
             Console.WriteLine("Enter the String to be hashed: ");
-            string input = "I gave my father 1 million dollars to hire cute nurses in his old age."; //Console.ReadLine();
+            string input = "I leave twenty million dollars to my friendly cousin Bill."; //Console.ReadLine();
 
             List<string> blocks = hash.stringToBlocks(input);
             int counter = 0;
@@ -39,8 +40,7 @@ namespace ToyTetragraphHash
                 Console.Out.Write(" ");
 
                 /*convertToIntsresult()
-                addColumns()
-
+              
                 rotateTwoDimensionArray()
                 convertToInts()
                 addColumns()
@@ -58,9 +58,15 @@ namespace ToyTetragraphHash
 
         internal string cleanString(string input)
         {
-
             string result = new string(input.Where(c => !char.IsPunctuation(c)).ToArray());
-            return result.Replace(" ", "").ToLower();
+
+            result = result.Replace(" ", "").ToLower();
+            if (Regex.IsMatch(input, @"^\d+$"))
+            {
+                throw new Exception("Input may not contain numbers");
+            }
+
+            return result;
         }
 
         internal List<String> stringToBlocks(String input)
@@ -230,7 +236,6 @@ namespace ToyTetragraphHash
             int[] runningTotal = new int[4];
             int counter = 0;
             int totalNumber = 0;
-
 
             for (int column = 0; column < 4; column++)
             {

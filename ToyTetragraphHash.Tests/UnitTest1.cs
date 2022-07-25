@@ -8,6 +8,15 @@ public class Tests
     }
 
     [Test]
+    public void testForNumbers()
+    {
+        ToyTetragraphHash hash = new ToyTetragraphHash();
+        string input = "1 flew over the coocoo next";
+        Assert.Throws<Exception>(
+             delegate { hash.cleanString(input); });
+    }
+
+    [Test]
     public void TestTitle()
     {
         ToyTetragraphHash hash = new ToyTetragraphHash();
@@ -167,6 +176,36 @@ public class Tests
     }
 
     [Test]
+    public void addColumnsFromChar()
+    {
+        ToyTetragraphHash hash = new ToyTetragraphHash();
+        string[,] stringArray = new string[4, 4];
+        stringArray[0, 0] = "i";
+        stringArray[0, 1] = "l";
+        stringArray[0, 2] = "e";
+        stringArray[0, 3] = "a";
+        stringArray[1, 0] = "v";
+        stringArray[1, 1] = "e";
+        stringArray[1, 2] = "t";
+        stringArray[1, 3] = "w";
+        stringArray[2, 0] = "e";
+        stringArray[2, 1] = "n";
+        stringArray[2, 2] = "t";
+        stringArray[2, 3] = "y";
+        stringArray[3, 0] = "m";
+        stringArray[3, 1] = "i";
+        stringArray[3, 2] = "l";
+        stringArray[3, 3] = "l";
+        int[,] intArray = hash.convertToIntsresult(stringArray);
+        int[] runningTotal = hash.addColumns(intArray);
+        Assert.AreEqual(19, runningTotal[0]);
+        Assert.AreEqual(10, runningTotal[1]);
+        Assert.AreEqual(1, runningTotal[2]);
+        Assert.AreEqual(5, runningTotal[3]);
+
+    }
+
+    [Test]
     public void addColumns()
     {
         ToyTetragraphHash hash = new ToyTetragraphHash();
@@ -194,6 +233,7 @@ public class Tests
         Assert.AreEqual(5, runningTotal[3]);
 
     }
+
 
     [Test]
     public void runningTotalToString()
