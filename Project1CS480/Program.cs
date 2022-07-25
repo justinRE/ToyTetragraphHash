@@ -13,12 +13,30 @@ namespace ToyTetragraphHash
         {
             ToyTetragraphHash hash = new ToyTetragraphHash();
             System.Console.WriteLine(hash.outTitle());
-        }
-        internal String outTitle()
-        {
-            return "ToyTetragraphHash";
+            /*
+            Console.WriteLine("Enter the String to be hashed: ");
+            string input = Console.ReadLine();
+
+            hash.stringToBlocks(input);
+            //calls cleanString and createBlocks
+            foreach(block in StringBlocks)
+            {
+                createTwoDimensionArrayFromString()
+                convertToIntsresult()
+                addColumns()
+
+                rotateTwoDimensionArray()
+                convertToInts()
+                addColumns()
+
+            }
+            */
         }
 
+        internal String outTitle()
+        {
+            return "Toy Tetragraph Hash: ";
+        }
 
         internal string cleanString(string input)
         {
@@ -209,7 +227,7 @@ namespace ToyTetragraphHash
                     totalNumber = 0;
                     counter = 0;
                 }
-                if(column==1)
+                if (column == 1)
                 {
                     runningTotal[1] = totalNumber;
                     totalNumber = 0;
@@ -240,6 +258,22 @@ namespace ToyTetragraphHash
         }
 
 
+        internal string runningTotalToString(int[] runingTotal)
+        {
+            //I can probably just add 65 to my numbers then use convert.ToChar
 
+
+            // string runningTotalString = string.Join(string.Empty, runingTotal);
+            // converts it all to one string
+
+            string[] runningTotalString = runingTotal.Select(i => i.ToString()).ToArray();
+            Console.WriteLine(String.Join(", ", runningTotalString));
+
+            for (int i=0; i< 4; i++)
+            {
+                runingTotalString[i] + 65;
+            }
+            return "yes";
+        }
     }
 }

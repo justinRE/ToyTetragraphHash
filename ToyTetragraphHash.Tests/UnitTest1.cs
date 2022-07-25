@@ -11,7 +11,7 @@ public class Tests
     public void TestTitle()
     {
         ToyTetragraphHash hash = new ToyTetragraphHash();
-        Assert.AreEqual(hash.outTitle(), "ToyTetragraphHash");
+        Assert.AreEqual(hash.outTitle(), "Toy Tetragraph Hash: ");
         Assert.Pass();
     }
 
@@ -129,7 +129,7 @@ public class Tests
         stringArray[3, 1] = "i";
         stringArray[3, 2] = "l";
         stringArray[3, 3] = "l";
-        int[,]numArray = hash.convertToInts(stringArray);
+        int[,] numArray = hash.convertToInts(stringArray);
         Assert.AreEqual(8, numArray[0, 0]);
         Assert.AreEqual(4, numArray[1, 1]);
         Assert.AreEqual(19, numArray[2, 2]);
@@ -192,6 +192,23 @@ public class Tests
         Assert.AreEqual(10, runningTotal[1]);
         Assert.AreEqual(1, runningTotal[2]);
         Assert.AreEqual(5, runningTotal[3]);
+
+    }
+
+    [Test]
+    public void runningTotalToString()
+    {
+        ToyTetragraphHash hash = new ToyTetragraphHash();
+        int[] runningTotal = new int[4];
+        runningTotal[0] = 1;
+        runningTotal[1] = 5;
+        runningTotal[2] = 16;
+        runningTotal[3] = 6;
+        string runningTotalTest = hash.runningTotalToString(runningTotal);
+        Assert.AreEqual('B', runningTotal[0]);
+        Assert.AreEqual('F', runningTotal[1]);
+        Assert.AreEqual('Q', runningTotal[2]);
+        Assert.AreEqual('G', runningTotal[3]);
 
     }
 
