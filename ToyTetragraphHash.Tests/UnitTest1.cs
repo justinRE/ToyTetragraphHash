@@ -112,11 +112,87 @@ public class Tests
     public void convertToInts()
     {
         ToyTetragraphHash hash = new ToyTetragraphHash();
-        String[,] testArray = hash.createTwoDimensionArrayFromString("abcdefghijklmnop");
-        String[,] rotatedArray = hash.rotateTwoDimensionArray(testArray);
-        Assert.AreEqual("b", rotatedArray[0, 0]);
-        Assert.AreEqual("h", rotatedArray[1, 1]);
-        Assert.AreEqual("j", rotatedArray[2, 2]);
-        Assert.AreEqual("m", rotatedArray[3, 3]);
+        String[,] stringArray = new String[4, 4];
+        stringArray[0, 0] = "i";
+        stringArray[0, 1] = "l";
+        stringArray[0, 2] = "e";
+        stringArray[0, 3] = "a";
+        stringArray[1, 0] = "v";
+        stringArray[1, 1] = "e";
+        stringArray[1, 2] = "t";
+        stringArray[1, 3] = "w";
+        stringArray[2, 0] = "e";
+        stringArray[2, 1] = "n";
+        stringArray[2, 2] = "t";
+        stringArray[2, 3] = "y";
+        stringArray[3, 0] = "m";
+        stringArray[3, 1] = "i";
+        stringArray[3, 2] = "l";
+        stringArray[3, 3] = "l";
+        int[,]numArray = hash.convertToInts(stringArray);
+        Assert.AreEqual(8, numArray[0, 0]);
+        Assert.AreEqual(4, numArray[1, 1]);
+        Assert.AreEqual(19, numArray[2, 2]);
+        Assert.AreEqual(11, numArray[3, 3]);
+
     }
+
+    [Test]
+    public void convertToIntsresult()
+    {
+        ToyTetragraphHash hash = new ToyTetragraphHash();
+        String[,] stringArray = new String[4, 4];
+        stringArray[0, 0] = "i";
+        stringArray[0, 1] = "l";
+        stringArray[0, 2] = "e";
+        stringArray[0, 3] = "a";
+        stringArray[1, 0] = "v";
+        stringArray[1, 1] = "e";
+        stringArray[1, 2] = "t";
+        stringArray[1, 3] = "w";
+        stringArray[2, 0] = "e";
+        stringArray[2, 1] = "n";
+        stringArray[2, 2] = "t";
+        stringArray[2, 3] = "y";
+        stringArray[3, 0] = "m";
+        stringArray[3, 1] = "i";
+        stringArray[3, 2] = "l";
+        stringArray[3, 3] = "l";
+        int[,] numArray = hash.convertToIntsresult(stringArray);
+        Assert.AreEqual(8, numArray[0, 0]);
+        Assert.AreEqual(4, numArray[1, 1]);
+        Assert.AreEqual(19, numArray[2, 2]);
+        Assert.AreEqual(11, numArray[3, 3]);
+
+    }
+
+    [Test]
+    public void addColumns()
+    {
+        ToyTetragraphHash hash = new ToyTetragraphHash();
+        int[,] intArray = new int[4, 4];
+        intArray[0, 0] = 8;
+        intArray[0, 1] = 21;
+        intArray[0, 2] = 4;
+        intArray[0, 3] = 12;
+        intArray[1, 0] = 11;
+        intArray[1, 1] = 4;
+        intArray[1, 2] = 13;
+        intArray[1, 3] = 8;
+        intArray[2, 0] = 4;
+        intArray[2, 1] = 19;
+        intArray[2, 2] = 19;
+        intArray[2, 3] = 11;
+        intArray[3, 0] = 0;
+        intArray[3, 1] = 22;
+        intArray[3, 2] = 24;
+        intArray[3, 3] = 11;
+        int[] runningTotal = hash.addColumns(intArray);
+        Assert.AreEqual(19, runningTotal[0]);
+        Assert.AreEqual(10, runningTotal[1]);
+        Assert.AreEqual(1, runningTotal[2]);
+        Assert.AreEqual(5, runningTotal[3]);
+
+    }
+
 }

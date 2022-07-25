@@ -18,26 +18,36 @@ namespace ToyTetragraphHash
         {
             return "ToyTetragraphHash";
         }
+
+
+        internal string cleanString(string input)
+        {
+
+            string result = new string(input.Where(c => !char.IsPunctuation(c)).ToArray());
+            return result.Replace(" ", "").ToLower();
+        }
+
         internal List<String> stringToBlocks(String input)
         {
             String inputCleaned = cleanString(input);
             List<String> stringBlocks = createBlocks(inputCleaned);
-           
+
             return stringBlocks;
         }
 
-        internal new List<String> createBlocks(string input) {
+        internal new List<String> createBlocks(string input)
+        {
             int counter = 0;
             string holder = "";
             StringBuilder sb = new StringBuilder(holder);
             List<string> letterList = new List<string>();
             StringBuilder inputholder = new StringBuilder(input);
 
-            if (input.Length % 16!= 0)
+            if (input.Length % 16 != 0)
             {
                 int leftovernumbers = input.Length % 16;
                 int remainder = 16 - leftovernumbers;
-                for(int i=0; i < remainder; i++)
+                for (int i = 0; i < remainder; i++)
                 {
                     inputholder.Append("a");
                 }
@@ -47,7 +57,7 @@ namespace ToyTetragraphHash
             {
                 sb.Append(item);
                 counter++;
-                if(counter%16==0)
+                if (counter % 16 == 0)
                 {
                     letterList.Add(sb.ToString());
                     if (DEBUG) Console.WriteLine(sb);
@@ -59,16 +69,11 @@ namespace ToyTetragraphHash
             return letterList;
         }
 
-        internal string cleanString(string input)
-        {
-
-            string result = new string(input.Where(c => !char.IsPunctuation(c)).ToArray());
-            return result.Replace(" ", "").ToLower();
-        }
-
+        //think I could have to .ToCharArray()
         internal string[,] createTwoDimensionArrayFromString(string input)
         {
-            if (input.Length != 16){
+            if (input.Length != 16)
+            {
                 throw new Exception("Invalid length");
             }
 
@@ -129,14 +134,112 @@ namespace ToyTetragraphHash
             return rotatedArray;
         }
 
-/*        internal int[,] convertToInts(string[,] result)
+        //also need result as nums
+        internal int[,] convertToInts(string[,] rotatedArray)
         {
-            int[,] arrayToInt = new int[4, 4];
-            result.ToCharArray();
-            arrayToInt[0, 0] = char.ToUpper(result[0, 0].ToCharArray) - 64;
-            //int index = char.ToUpper(c) - 64;
-            return arrayToInt[,];
+            int[,] numArray = new int[4, 4];
+            char[,] charRotatedArray = new char[4, 4];
+
+            for (int row1 = 0; row1 < 4; row1++)
+            {
+                for (int column1 = 0; column1 < 4; column1++)
+                {
+                    char character;
+                    char.TryParse(rotatedArray[row1, column1], out character);
+                    charRotatedArray[row1, column1] = character;
+                }
+            }
+
+            //toint
+            for (int row = 0; row < 4; row++)
+            {
+                for (int column = 0; column < 4; column++)
+                {
+                    numArray[row, column] = charRotatedArray[row, column] - 97;
+                }
+            }
+
+            return numArray;
         }
-*/
+
+        internal int[,] convertToIntsresult(string[,] result)
+        {
+            int[,] numArray = new int[4, 4];
+            char[,] charRotatedArray = new char[4, 4];
+
+            for (int row1 = 0; row1 < 4; row1++)
+            {
+                for (int column1 = 0; column1 < 4; column1++)
+                {
+                    char character;
+                    char.TryParse(result[row1, column1], out character);
+                    charRotatedArray[row1, column1] = character;
+                }
+            }
+
+            //toint
+            for (int row = 0; row < 4; row++)
+            {
+                for (int column = 0; column < 4; column++)
+                {
+                    numArray[row, column] = charRotatedArray[row, column] - 97;
+                }
+            }
+
+            return numArray;
+        }
+
+        internal int[] addColumns(int[,] numArray)
+        {
+            int[] runningTotal = new int[4];
+            int counter = 0;
+            int totalNumber = 0;
+
+
+            for (int column = 0; column < 4; column++)
+            {
+                for (int row = 0; row < 4; row++)
+                {
+                    counter += numArray[column, row];
+                    totalNumber = counter % 26;
+                }
+                if (column == 0)
+                {
+                    runningTotal[0] = totalNumber;
+                    totalNumber = 0;
+                    counter = 0;
+                }
+                if(column==1)
+                {
+                    runningTotal[1] = totalNumber;
+                    totalNumber = 0;
+                    counter = 0;
+                }
+                if (column == 2)
+                {
+                    runningTotal[2] = totalNumber;
+                    totalNumber = 0;
+                    counter = 0;
+                }
+                if (column == 3)
+                {
+                    runningTotal[3] = totalNumber;
+                    totalNumber = 0;
+                    counter = 0;
+                }
+            }
+            if (DEBUG)
+            {
+                foreach (var item in runningTotal)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            return runningTotal;
+
+        }
+
+
+
     }
 }
