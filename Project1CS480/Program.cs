@@ -24,8 +24,9 @@ namespace ToyTetragraphHash
             foreach(string block in blocks)
             {
                 counter++;
+                Console.Out.WriteLine(" ");
                 Console.Out.Write("Block {0}: ", counter); 
-                Console.Out.WriteLine(block);
+                Console.Out.Write(block);
 
                 string[,] results = hash.createTwoDimensionArrayFromString(block);
                 int[,] intResults = hash.convertToInts(results);
@@ -35,7 +36,7 @@ namespace ToyTetragraphHash
                 {
                     Console.Write("{0} ", i);
                 }
-                Console.Out.WriteLine(block);
+                Console.Out.Write(" ");
 
                 /*convertToIntsresult()
                 addColumns()
