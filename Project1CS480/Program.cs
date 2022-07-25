@@ -258,22 +258,16 @@ namespace ToyTetragraphHash
         }
 
 
-        internal string runningTotalToString(int[] runingTotal)
+        internal char[] runningTotalToString(int[] runningTotal)
         {
-            //I can probably just add 65 to my numbers then use convert.ToChar
+            char[] result = new char[4];
+           
+            result[0] = (char)(runningTotal[0] + 65);
+            result[1] = (char)(runningTotal[1] + 65);
+            result[2] = (char)(runningTotal[2] + 65);
+            result[3] = (char)(runningTotal[3] + 65);
 
-
-            // string runningTotalString = string.Join(string.Empty, runingTotal);
-            // converts it all to one string
-
-            string[] runningTotalString = runingTotal.Select(i => i.ToString()).ToArray();
-            Console.WriteLine(String.Join(", ", runningTotalString));
-
-            for (int i=0; i< 4; i++)
-            {
-                runingTotalString[i] + 65;
-            }
-            return "yes";
+            return result;
         }
     }
 }

@@ -204,11 +204,16 @@ public class Tests
         runningTotal[1] = 5;
         runningTotal[2] = 16;
         runningTotal[3] = 6;
-        string runningTotalTest = hash.runningTotalToString(runningTotal);
-        Assert.AreEqual('B', runningTotal[0]);
-        Assert.AreEqual('F', runningTotal[1]);
-        Assert.AreEqual('Q', runningTotal[2]);
-        Assert.AreEqual('G', runningTotal[3]);
+
+        char[] convertedTotal = hash.runningTotalToString(runningTotal);
+
+        Console.Out.WriteLine("input: {0}" + string.Join(", ", runningTotal));
+        Console.Out.WriteLine("output: {0}" + string.Join(", ", convertedTotal));
+
+        Assert.AreEqual('B', convertedTotal[0]);
+        Assert.AreEqual('F', convertedTotal[1]);
+        Assert.AreEqual('Q', convertedTotal[2]);
+        Assert.AreEqual('G', convertedTotal[3]);
 
     }
 
