@@ -40,7 +40,7 @@ public class Tests
     {
         ToyTetragraphHash hash = new ToyTetragraphHash();
         String[,] result = hash.createTwoDimensionArrayFromString("ABCDEFGHIJKLMNOP");
-        Assert.AreEqual(4,result.GetLength(0));
+        Assert.AreEqual(4, result.GetLength(0));
         Assert.AreEqual(4, result.GetLength(1));
 
     }
@@ -100,10 +100,23 @@ public class Tests
     public void TestRotateTwoDimensionArray()
     {
         ToyTetragraphHash hash = new ToyTetragraphHash();
-        String[,] result = hash.createTwoDimensionArrayFromString("ABCDEFGHIJKLMNOP");
-        Assert.AreEqual(result[0, 0], "A");
-        Assert.AreEqual(result[1, 0], "E");
-        Assert.AreEqual(result[2, 2], "K");
-
-
+        String[,] testArray = hash.createTwoDimensionArrayFromString("abcdefghijklmnop");
+        String[,] rotatedArray = hash.rotateTwoDimensionArray(testArray);
+        Assert.AreEqual("b", rotatedArray[0, 0]);
+        Assert.AreEqual("h", rotatedArray[1, 1]);
+        Assert.AreEqual("j", rotatedArray[2, 2]);
+        Assert.AreEqual("m", rotatedArray[3, 3]);
     }
+
+    [Test]
+    public void convertToInts()
+    {
+        ToyTetragraphHash hash = new ToyTetragraphHash();
+        String[,] testArray = hash.createTwoDimensionArrayFromString("abcdefghijklmnop");
+        String[,] rotatedArray = hash.rotateTwoDimensionArray(testArray);
+        Assert.AreEqual("b", rotatedArray[0, 0]);
+        Assert.AreEqual("h", rotatedArray[1, 1]);
+        Assert.AreEqual("j", rotatedArray[2, 2]);
+        Assert.AreEqual("m", rotatedArray[3, 3]);
+    }
+}

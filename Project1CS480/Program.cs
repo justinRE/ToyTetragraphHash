@@ -8,6 +8,7 @@ namespace ToyTetragraphHash
     {
         private const Boolean DEBUG = true;
 
+
         static void Main(string[] args)
         {
             ToyTetragraphHash hash = new ToyTetragraphHash();
@@ -98,17 +99,44 @@ namespace ToyTetragraphHash
                 }
             }
             return result;
-            //
         }
 
-        /* So I want to pass in result to this method
-        internal string[,] rotateTwoDimensionArray(string[,])
+        internal string[,] rotateTwoDimensionArray(string[,] result)
         {
-            string[,] result = new string[4, 4];
+            string[,] rotatedArray = new string[4, 4];
 
-            return result;
+            //rotate1
+            rotatedArray[0, 3] = result[0, 0];
+            rotatedArray[0, 0] = result[0, 1];
+            rotatedArray[0, 1] = result[0, 2];
+            rotatedArray[0, 2] = result[0, 3];
+            //rotate2
+            rotatedArray[1, 2] = result[1, 0];
+            rotatedArray[1, 3] = result[1, 1];
+            rotatedArray[1, 0] = result[1, 2];
+            rotatedArray[1, 1] = result[1, 3];
+            //rotate3
+            rotatedArray[2, 1] = result[2, 0];
+            rotatedArray[2, 2] = result[2, 1];
+            rotatedArray[2, 3] = result[2, 2];
+            rotatedArray[2, 0] = result[2, 3];
+            //reverse
+            rotatedArray[3, 3] = result[3, 0];
+            rotatedArray[3, 2] = result[3, 1];
+            rotatedArray[3, 1] = result[3, 2];
+            rotatedArray[3, 0] = result[3, 3];
+
+            return rotatedArray;
         }
-        */
 
+/*        internal int[,] convertToInts(string[,] result)
+        {
+            int[,] arrayToInt = new int[4, 4];
+            result.ToCharArray();
+            arrayToInt[0, 0] = char.ToUpper(result[0, 0].ToCharArray) - 64;
+            //int index = char.ToUpper(c) - 64;
+            return arrayToInt[,];
+        }
+*/
     }
 }
