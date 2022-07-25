@@ -241,7 +241,7 @@ namespace ToyTetragraphHash
             {
                 for (int row = 0; row < 4; row++)
                 {
-                    counter += numArray[column, row];
+                    counter += numArray[row, column];
                     totalNumber = counter % 26;
                 }
                 if (column == 0)
