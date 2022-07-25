@@ -30,8 +30,19 @@ namespace ToyTetragraphHash
             string holder = "";
             StringBuilder sb = new StringBuilder(holder);
             List<string> letterList = new List<string>();
+            StringBuilder inputholder = new StringBuilder(input);
 
-            foreach (char item in input)
+            if (input.Length % 16!= 0)
+            {
+                int leftovernumbers = input.Length % 16;
+                int remainder = 16 - leftovernumbers;
+                for(int i=0; i < remainder; i++)
+                {
+                    inputholder.Append("a");
+                }
+            }
+
+            foreach (char item in inputholder.ToString())
             {
                 sb.Append(item);
                 counter++;
@@ -41,9 +52,8 @@ namespace ToyTetragraphHash
                     if (DEBUG) Console.WriteLine(sb);
                     sb.Clear();
                 }
-            }
 
-            //     too short, padd with nulls
+            }
 
             return letterList;
         }
@@ -58,7 +68,7 @@ namespace ToyTetragraphHash
         internal string[,] createTwoDimensionArrayFromString(string input)
         {
             if (input.Length != 16){
-                throw new Exception("Invalid length"); //expection
+                throw new Exception("Invalid length");
             }
 
             int counter = 0;
@@ -88,6 +98,17 @@ namespace ToyTetragraphHash
                 }
             }
             return result;
+            //
         }
+
+        /* So I want to pass in result to this method
+        internal string[,] rotateTwoDimensionArray(string[,])
+        {
+            string[,] result = new string[4, 4];
+
+            return result;
+        }
+        */
+
     }
 }

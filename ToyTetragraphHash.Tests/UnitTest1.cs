@@ -60,6 +60,7 @@ public class Tests
         Assert.Throws<Exception>(
              delegate { hash.createTwoDimensionArrayFromString("ABCDEF"); });
     }
+
     [Test]
     public void TestCreateTwoDimensionArrayFromStringValueTest()
     {
@@ -83,4 +84,26 @@ public class Tests
 
     }
 
-}
+    [Test]
+    public void TestPadding()
+    {
+        String input = "ileavetwentymilliondollarstomyfriendlycousin";
+        ToyTetragraphHash hash = new ToyTetragraphHash();
+        List<string> blocks = hash.createBlocks(input);
+        Assert.IsInstanceOf<List<string>>(blocks);
+
+        Assert.AreEqual(3, blocks.Count);
+
+    }
+
+    [Test]
+    public void TestRotateTwoDimensionArray()
+    {
+        ToyTetragraphHash hash = new ToyTetragraphHash();
+        String[,] result = hash.createTwoDimensionArrayFromString("ABCDEFGHIJKLMNOP");
+        Assert.AreEqual(result[0, 0], "A");
+        Assert.AreEqual(result[1, 0], "E");
+        Assert.AreEqual(result[2, 2], "K");
+
+
+    }
