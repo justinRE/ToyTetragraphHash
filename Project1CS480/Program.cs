@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 [assembly: InternalsVisibleTo("ToyTetragraphHash.Tests")]
@@ -6,31 +7,47 @@ namespace ToyTetragraphHash
 {
     class ToyTetragraphHash
     {
-        private const Boolean DEBUG = true;
+        private const Boolean DEBUG = false;
 
 
         static void Main(string[] args)
         {
             ToyTetragraphHash hash = new ToyTetragraphHash();
             System.Console.WriteLine(hash.outTitle());
-            /*
+            
             Console.WriteLine("Enter the String to be hashed: ");
-            string input = Console.ReadLine();
+            string input = "I gave my father 1 million dollars to hire cute nurses in his old age."; //Console.ReadLine();
 
-            hash.stringToBlocks(input);
+            List<string> blocks = hash.stringToBlocks(input);
+            int counter = 0;
             //calls cleanString and createBlocks
-            foreach(block in StringBlocks)
+            foreach(string block in blocks)
             {
-                createTwoDimensionArrayFromString()
-                convertToIntsresult()
+                counter++;
+                Console.Out.Write("Block {0}: ", counter); 
+                Console.Out.WriteLine(block);
+
+                string[,] results = hash.createTwoDimensionArrayFromString(block);
+                int[,] intResults = hash.convertToInts(results);
+                int[] columnResults = hash.addColumns(intResults);
+                Console.Out.Write(" - ");
+                foreach (int i in columnResults)
+                {
+                    Console.Write("{0} ", i);
+                }
+                Console.Out.WriteLine(block);
+
+                /*convertToIntsresult()
                 addColumns()
 
                 rotateTwoDimensionArray()
                 convertToInts()
                 addColumns()
+                */
+
+
 
             }
-            */
         }
 
         internal String outTitle()
