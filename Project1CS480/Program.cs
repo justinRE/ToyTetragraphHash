@@ -17,7 +17,7 @@ namespace ToyTetragraphHash
             System.Console.WriteLine(hash.outTitle());
 
             Console.WriteLine("Enter the String to be hashed: ");
-            string input = "I leave twenty million dollars to my friendly cousin Bill."; //Console.ReadLine();
+            Console.ReadLine();
 
             List<string> blocks = hash.stringToBlocks(input);
             int counter = 0;
