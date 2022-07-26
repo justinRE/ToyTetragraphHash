@@ -23,12 +23,16 @@ namespace ToyTetragraphHash
             int counter = 0;
             int[] runningTotal = new int[4];
             //calls cleanString and createBlocks
+            char[] finalResults = new char[4];
             foreach (string block in blocks)
             {
+                if (DEBUG)
+                {
+                    Console.Out.WriteLine(" ");
+                    Console.Out.Write("Block {0}: ", counter);
+                    Console.Out.Write(block);
+                }
 
-                Console.Out.WriteLine(" ");
-                Console.Out.Write("Block {0}: ", counter);
-                Console.Out.Write(block);
 
                 string[,] results = hash.createTwoDimensionArrayFromString(block);
                 int[,] intResults = hash.convertToInts(results);
@@ -36,26 +40,28 @@ namespace ToyTetragraphHash
                 runningTotal = hash.addRunningTotal(runningTotal,columnResults);
                 counter++;
 
-                Console.Out.Write(" - ");
-                foreach (int i in columnResults)
+                if(DEBUG)
                 {
-                    Console.Write("{0} ", i);
+                    Console.Out.Write(" - ");
+                    foreach (int i in columnResults)
+                    {
+                        Console.Write("{0} ", i);
+                    }
+                    Console.Out.Write(" ");
                 }
-                Console.Out.Write(" ");
+
 
                 string[,] rotatedArray = hash.rotateTwoDimensionArray(results);
                 int[,] intArrayResults = hash.convertToIntsresult(rotatedArray);
                 int[] rotatedColumnResults = hash.addColumns(intArrayResults);
                 runningTotal = hash.addRunningTotal(runningTotal, rotatedColumnResults);
 
-                char[] finalResults = hash.runningTotalToString(runningTotal);
+                finalResults = hash.runningTotalToString(runningTotal);
 
-                //final results for each block we still need to sum them all
-                //so this is correct for block1, it's just not running through the foreach iterator?
-                foreach (var item in finalResults)
-                {
-                    Console.WriteLine(item);
-                }
+            }
+            foreach (var item in finalResults)
+            {
+                Console.Write(item);
             }
 
         }
@@ -70,7 +76,7 @@ namespace ToyTetragraphHash
             string result = new string(input.Where(c => !char.IsPunctuation(c)).ToArray());
 
             result = result.Replace(" ", "").ToLower();
-            if (Regex.IsMatch(input, @"^\d+$"))
+            if (result.Any(char.IsDigit))
             {
                 throw new Exception("Input may not contain numbers");
             }
