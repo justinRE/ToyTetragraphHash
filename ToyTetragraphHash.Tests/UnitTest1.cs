@@ -257,4 +257,26 @@ public class Tests
 
     }
 
+    [Test]
+    public void TestaddRunningTotal()
+    {
+        int[] runningTotal = new int[4];
+        runningTotal[0] = 19;
+        runningTotal[1] = 10;
+        runningTotal[2] = 1;
+        runningTotal[3] = 5;
+
+        int[] columnTotal = new int[4];
+        columnTotal[0] = 13;
+        columnTotal[1] = 15;
+        columnTotal[2] = 16;
+        columnTotal[3] = 17;
+        ToyTetragraphHash hash = new ToyTetragraphHash();
+        int[] newTotal = hash.addRunningTotal(runningTotal, columnTotal);
+        Assert.AreEqual(6, newTotal[0]);
+        Assert.AreEqual(25, newTotal[1]);
+        Assert.AreEqual(17, newTotal[2]);
+        Assert.AreEqual(22, newTotal[3]);
+    }
+
 }

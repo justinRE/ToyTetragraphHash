@@ -9,29 +9,33 @@ namespace ToyTetragraphHash
     class ToyTetragraphHash
     {
         private const Boolean DEBUG = false;
-        int[] runningTotal = new int[4];
+
 
         static void Main(string[] args)
         {
             ToyTetragraphHash hash = new ToyTetragraphHash();
             System.Console.WriteLine(hash.outTitle());
-            
+
             Console.WriteLine("Enter the String to be hashed: ");
             string input = "I leave twenty million dollars to my friendly cousin Bill."; //Console.ReadLine();
 
             List<string> blocks = hash.stringToBlocks(input);
             int counter = 0;
+            int[] runningTotal = new int[4];
             //calls cleanString and createBlocks
-            foreach(string block in blocks)
+            foreach (string block in blocks)
             {
-                counter++;
+
                 Console.Out.WriteLine(" ");
-                Console.Out.Write("Block {0}: ", counter); 
+                Console.Out.Write("Block {0}: ", counter);
                 Console.Out.Write(block);
 
                 string[,] results = hash.createTwoDimensionArrayFromString(block);
                 int[,] intResults = hash.convertToInts(results);
                 int[] columnResults = hash.addColumns(intResults);
+                runningTotal = hash.addRunningTotal(runningTotal,columnResults);
+                counter++;
+
                 Console.Out.Write(" - ");
                 foreach (int i in columnResults)
                 {
@@ -39,16 +43,21 @@ namespace ToyTetragraphHash
                 }
                 Console.Out.Write(" ");
 
-                /*convertToIntsresult()
-              
-                rotateTwoDimensionArray()
-                convertToInts()
-                addColumns()
-                */
+                string[,] rotatedArray = hash.rotateTwoDimensionArray(results);
+                int[,] intArrayResults = hash.convertToIntsresult(rotatedArray);
+                int[] rotatedColumnResults = hash.addColumns(intArrayResults);
+                runningTotal = hash.addRunningTotal(runningTotal, rotatedColumnResults);
 
+                char[] finalResults = hash.runningTotalToString(runningTotal);
 
-
+                //final results for each block we still need to sum them all
+                //so this is correct for block1, it's just not running through the foreach iterator?
+                foreach (var item in finalResults)
+                {
+                    Console.WriteLine(item);
+                }
             }
+
         }
 
         internal String outTitle()
@@ -235,10 +244,14 @@ namespace ToyTetragraphHash
         {
             int counter = 0;
             int totalNumber = 0;
+            int[] runningTotal = new int[4];
 
-            for (int column = 0; column < 4; column++)
+            const int COL = 1;
+            const int ROW = 0;
+
+            for (int column = 0; column < numArray.GetLength(COL); column++)
             {
-                for (int row = 0; row < 4; row++)
+                for (int row = 0; row < numArray.GetLength(ROW); row++)
                 {
                     counter += numArray[row, column];
                     totalNumber = counter % 26;
@@ -287,7 +300,7 @@ namespace ToyTetragraphHash
         internal char[] runningTotalToString(int[] runningTotal)
         {
             char[] result = new char[4];
-           
+
             result[0] = (char)(runningTotal[0] + 65);
             result[1] = (char)(runningTotal[1] + 65);
             result[2] = (char)(runningTotal[2] + 65);
@@ -295,5 +308,23 @@ namespace ToyTetragraphHash
 
             return result;
         }
+
+        internal int[] addRunningTotal(int[] runningTotal, int[] columnResults)
+        {
+            int[] newTotal = new int[4];
+            int holder = 0;
+            int holderone = 0;
+
+            const int ROW = 0;
+
+            for (int i = 0; i < runningTotal.GetLength(ROW); i++)
+            {
+                holder = runningTotal[i] + columnResults[i];
+                holderone = holder % 26;
+                newTotal[i] = holderone;
+            }
+            return newTotal;
+        }
+
     }
 }
